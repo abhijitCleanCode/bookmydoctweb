@@ -1,15 +1,7 @@
 import { FormFieldType } from "@/config/FormFieldTypes";
 import { FormField } from "@/types/formField.interface";
 
-export const signupFormFields: FormField[] = [
-    {
-        name: "name",
-        label: "Name",
-        type: FormFieldType.INPUT,
-        inputType: "text",
-        placeholder: "John Doe",
-        required: true
-    },
+export const loginFormFields: FormField[] = [
     {
         name: "email",
         label: "Email",
