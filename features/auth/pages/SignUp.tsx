@@ -5,6 +5,7 @@ import { signupFormFields } from "../config/signup.config"
 import { signupSchema } from "@/formSchemas/signup.schema"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Image from "next/image"
 
 const SignUp = () => {
   return (
@@ -30,7 +31,8 @@ const SignUp = () => {
       </div>
 
       <div className="grid">
-        <Button variant="outline" className="bg-white border-gray-200 hover:text-blue-600">
+        <Button variant="outline" className="flex items-center gap-1.5 bg-white border-gray-200 hover:text-blue-600">
+          <Image src="/icons/google.png" alt="icon" width={18} height={18} />
           <span className="whitespace-nowrap">Google</span>
         </Button>
       </div>

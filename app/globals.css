@@ -120,9 +120,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-@layer utilities {
-  .shad-input {
-    @apply placeholder:text-gray-700 h-11 focus-visible:ring-0 focus-visible:ring-offset-0 !important;
-  }
-}
