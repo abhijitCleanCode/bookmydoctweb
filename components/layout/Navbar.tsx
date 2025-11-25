@@ -17,22 +17,22 @@ const navBarItems = [
 
 const Navbar = () => {
   const [navbarState, setNavbarState] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  // const [isScrolled, setIsScrolled] = useState(false);
 
   // const router = useRouter();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setIsScrolled(window.scrollY > 50);
+  //   };
+  //   window.addEventListener('scroll', handleScroll);
 
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [])
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, [])
 
   return (
-    <header>
-      <nav className="fixed left-0 w-full z-20 px-2">
+    <header className="flex justify-center">
+      <nav className="fixed top-0 z-20 px-2 max-w-4xl w-full">
         {/* <div
           className={cn(
             "mx-auto mt-2 w-full px-6 transition-all duration-300 lg:px-12",

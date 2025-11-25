@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Schibsted_Grotesk, Martian_Mono } from "next/font/google";
 import "./globals.css";
 
+import ReactQueryProvider from "@/lib/react-query/providers";
+import { Toaster } from 'sonner';
+
 const schibstedGrotesk = Schibsted_Grotesk({
   variable: "--font-schibsted-grotesk",
   subsets: ["latin"],
@@ -28,9 +31,10 @@ export default function RootLayout({
         className={`${schibstedGrotesk.variable} ${martianMono.variable} min-h-screen bg-linear-to-br from-gray-50 to-gray-100 antialiased`}
       >
 
-        <>
+        <ReactQueryProvider>
           {children}
-        </>
+          <Toaster richColors />
+        </ReactQueryProvider>
 
       </body>
     </html>

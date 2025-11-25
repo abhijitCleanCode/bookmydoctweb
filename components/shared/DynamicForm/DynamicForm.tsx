@@ -12,12 +12,14 @@ import TextAreaField from "./fields/TextAreaField"
 import { FormField, } from "@/types/formField.interface"
 import { FormFieldType } from "@/config/FormFieldTypes"
 import { Button } from "@/components/ui/button"
+import { Loader2 } from "lucide-react"
 
 interface DynamicFormProps {
   fields: FormField[];
   schema: any;
   onSubmit: (data: any) => void;
   submitLabel?: string;
+  isPending?: boolean;
 }
 
 const RenderField = (field: FormField) => {
@@ -41,6 +43,7 @@ const DynamicForm = ({
   schema,
   onSubmit,
   submitLabel = "Submit",
+  isPending
 }: DynamicFormProps) => {
 
   // define form
@@ -58,10 +61,10 @@ const DynamicForm = ({
 
         <Button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || isPending}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white"
         >
-          {submitLabel}
+          {isPending ? <span className="flex items-center gap-1.5"><Loader2 className="mr-2 h-4 w-4 animate-spin" />{submitLabel}</span> : submitLabel}
         </Button>
       </form>
     </FormProvider>
