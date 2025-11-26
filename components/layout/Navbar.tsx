@@ -41,7 +41,7 @@ const Navbar = () => {
           )}
         > */}
         <div
-          className="mx-auto mt-2 w-full px-6 py-3 bg-white rounded-full shadow-md relative z-10"
+          className="mx-auto mt-2 w-full px-6 py-3 bg-white rounded-full shadow relative z-10"
         >
           <div className="relative flex flex-wrap items-center justify-between gap-6 lg:gap-0 py-2">
             {/* logo and mobile menu button */}

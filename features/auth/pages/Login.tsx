@@ -6,8 +6,43 @@ import { loginSchema } from "@/formSchemas/login.schema"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { useLogin } from "../hooks/useLogin"
+import { LoginPayload } from "@/types/auth"
+import { ApiError } from "@/utils/ApiError"
+import { toast } from "sonner"
 
 const Login = () => {
+
+  const router = useRouter();
+
+  const { mutateAsync, isPending } = useLogin();
+  const handleLogin = async (data: LoginPayload) => {
+    try {
+      const response = await mutateAsync(data);
+
+      toast.success(response.message);
+
+      router.push("/");
+    } catch (error) {
+      console.log(
+        "features :: auth :: pages :: Login :: handleLogin :: error: ",
+        error
+      );
+
+      if (error instanceof ApiError) {
+        // this is custom backend error
+        toast.error(error.message);
+      } else if (error instanceof Error) {
+        // this is generic error such as network or js error
+        toast.error(error.message);
+      } else {
+        toast.error("An unexpected error occurred");
+      }
+    }
+  }
+
+
   return (
     <div className="p-8">
       <div className="mb-8">
@@ -18,7 +53,8 @@ const Login = () => {
       <DynamicForm
         fields={loginFormFields}
         schema={loginSchema}
-        onSubmit={() => { }}
+        onSubmit={handleLogin}
+        isPending={isPending}
         submitLabel="Login"
       />
 

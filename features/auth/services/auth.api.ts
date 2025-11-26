@@ -1,4 +1,4 @@
-import { SignUpPayload, SignUpResponse, VerifyEmailPayload } from "@/types/auth";
+import { LoginPayload, LoginResponse, SignUpPayload, SignUpResponse, VerifyEmailPayload } from "@/types/auth";
 import { ApiError, ApiErrorResponse } from "@/utils/ApiError";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -31,6 +31,26 @@ export async function verifyEmailApi ({ otpId, otp, userId }: VerifyEmailPayload
             "Content-Type": "application/json",
         },
         body: JSON.stringify({ otpId, otp, userId })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        const errorData = data as ApiErrorResponse;
+
+        throw new ApiError(errorData);
+    }
+
+    return data;
+}
+
+export async function loginApi({email, password }: LoginPayload): Promise<LoginResponse> {
+    const response = await fetch(`${baseUrl}/api/v1/user/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({email, password})
     });
 
     const data = await response.json();

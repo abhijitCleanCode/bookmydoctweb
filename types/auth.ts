@@ -28,7 +28,6 @@ export interface User {
 
     otpId?: string;
 }
-
 export type SignUpResponse = ApiResponse<User>;
 
 export interface VerifyEmailPayload {
@@ -36,3 +35,27 @@ export interface VerifyEmailPayload {
     otp: string;
     userId: string;
 }
+
+export interface LoginPayload {
+    email: string;
+    password: string;
+}
+
+export interface LoginUser {
+        _id: string;
+        name: string;
+        email: string;
+        password?: string;
+        phoneNumber?: string;
+        isEmailVerified: boolean;
+
+        role: string; //* make it union: "admin" | "user"
+
+        city?: string;
+        pincode?: number;
+        state?: string;
+        createdAt: string;
+        updatedAt: string;
+        __v: number;
+}
+export type LoginResponse = ApiResponse<LoginUser>;
