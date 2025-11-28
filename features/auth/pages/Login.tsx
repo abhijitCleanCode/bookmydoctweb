@@ -42,7 +42,6 @@ const Login = () => {
     }
   }
 
-
   return (
     <div className="p-8">
       <div className="mb-8">
@@ -56,6 +55,7 @@ const Login = () => {
         onSubmit={handleLogin}
         isPending={isPending}
         submitLabel="Login"
+        showForgotPassword={true}
       />
 
       <div className="flex items-center my-4">

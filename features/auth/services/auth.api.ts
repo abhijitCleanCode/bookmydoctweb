@@ -47,6 +47,7 @@ export async function verifyEmailApi ({ otpId, otp, userId }: VerifyEmailPayload
 export async function loginApi({email, password }: LoginPayload): Promise<LoginResponse> {
     const response = await fetch(`${baseUrl}/api/v1/user/login`, {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
         },

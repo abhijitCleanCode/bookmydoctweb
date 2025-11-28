@@ -20,6 +20,7 @@ interface DynamicFormProps {
   onSubmit: (data: any) => void;
   submitLabel?: string;
   isPending?: boolean;
+  showForgotPassword?: boolean;
 }
 
 const RenderField = (field: FormField) => {
@@ -43,7 +44,8 @@ const DynamicForm = ({
   schema,
   onSubmit,
   submitLabel = "Submit",
-  isPending
+  isPending,
+  showForgotPassword
 }: DynamicFormProps) => {
 
   // define form
@@ -58,6 +60,12 @@ const DynamicForm = ({
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {fields.map((field) => RenderField(field))}
+
+        {showForgotPassword && (
+          <p className="text-blue-500 text-right cursor-pointer">
+            Forgot password?
+          </p>
+        )}
 
         <Button
           type="submit"

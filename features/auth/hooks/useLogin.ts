@@ -1,12 +1,14 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { loginApi } from "../services/auth.api";
 
 export function useLogin() {
+    const queryClient = useQueryClient();
+
     return useMutation({
         mutationFn: loginApi,
         onSuccess: (data) => {
             console.log("Login successful :: data: ", data);
-            // handle success: redirect, show toast
+            queryClient.setQueryData(['auth', 'me'], data);
         },
         onError: (error) => {
             console.log("Login failed :: error: ", error);

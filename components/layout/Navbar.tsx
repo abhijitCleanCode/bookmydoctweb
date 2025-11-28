@@ -7,6 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Equal, X } from "lucide-react";
 import { Button } from "../ui/button";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import UserProfile from "../navbar/UserProfile";
 
 const navBarItems = [
   { name: 'Home', href: '/' },
@@ -17,29 +19,13 @@ const navBarItems = [
 
 const Navbar = () => {
   const [navbarState, setNavbarState] = useState(false);
-  // const [isScrolled, setIsScrolled] = useState(false);
+  const { user, isAuthenticated, isLoading } = useAuth();
 
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setIsScrolled(window.scrollY > 50);
-  //   };
-  //   window.addEventListener('scroll', handleScroll);
-
-  //   return () => window.removeEventListener('scroll', handleScroll);
-  // }, [])
+  console.log("user :: ", user);
 
   return (
     <header className="flex justify-center">
       <nav className="fixed top-0 z-20 px-2 max-w-4xl w-full">
-        {/* <div
-          className={cn(
-            "mx-auto mt-2 w-full px-6 transition-all duration-300 lg:px-12",
-            isScrolled &&
-            "bg-white rounded-2xl shadow-xl transition-[max-width] lg:px-5"
-          )}
-        > */}
         <div
           className="mx-auto mt-2 w-full px-6 py-3 bg-white rounded-full shadow relative z-10"
         >
@@ -83,11 +69,22 @@ const Navbar = () => {
             </div>
 
             {/* desktop cta button */}
-            <div className="hidden gap-2 lg:flex">
-              {/* {authStatus ? <UserProfile /> : <> */}
-              <Link href="/login" className="inline-flex items-center justify-center px-5 py-2 text-sm text-white bg-blue-500 rounded-full hover:bg-blue-800 transition-colors">
-                Get Started
-              </Link>
+            <div className="hidden gap-2 lg:flex items-center">
+              {isLoading ? (
+                <div className="w-10 h-10 bg-gray-200 rounded-full animate-spin" />
+              ) : isAuthenticated ? (
+                <UserProfile userData={{
+                  name: user?.data.name,
+                  email: user?.data.email
+                  // add more fields...
+                }} />
+              ) : (
+                <>
+                  <Link href="/login" className="inline-flex items-center justify-center px-5 py-2 text-sm text-white bg-blue-500 rounded-full hover:bg-blue-800 transition-colors">
+                    Get Started
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
